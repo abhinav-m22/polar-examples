@@ -18,9 +18,21 @@ npm install
 
 2. Configure environment variables:
 
-Update the `wrangler.jsonc` file in the project root with your environment variables.
+Populate environment variables in your workspace to:
 
-3. Run the Next.js application using the following command:
+- cp .env.example .env - for locally running the project
+- cp wrangler.jsonc.example wrangler.jsonc - for running the project with wrangler and on workers
+
+3. Create the database schema
+
+```bash
+npx @better-auth/cli@latest generate
+npx drizzle-kit generate --config=auth-schema.ts
+```
+
+Post that is done, run the SQL queries generated in the drizzle/*.sql file against your database.
+
+4. Run the Next.js application using the following command:
 
 ```bash
 npm run dev
