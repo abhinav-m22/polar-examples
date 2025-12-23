@@ -41,26 +41,3 @@ python manage.py runserver 0.0.0.0:8000
 ```
 
 The application will be available at `http://localhost:8000`.
-
-## Features
-
-- **Home Page (`/`)**: Displays all available products with checkout links and a customer portal form
-- **Checkout (`/checkout`)**: Creates a checkout session and redirects to Polar checkout
-- **Customer Portal (`/portal`)**: Allows customers to manage their subscriptions
-- **Webhooks (`/polar/webhooks`)**: Handles Polar webhook events with signature verification
-
-## Project Structure
-
-```
-with-django/
-├── config/           # Django project settings
-│   ├── settings.py
-│   ├── urls.py
-│   └── wsgi.py
-├── polar_app/        # Polar integration app
-│   ├── views.py      # Class-based views for Polar endpoints
-│   └── urls.py       # URL routing
-├── manage.py
-├── requirements.txt
-└── .env.example
-```
