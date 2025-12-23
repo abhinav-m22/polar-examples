@@ -1,5 +1,5 @@
 import { createError, defineEventHandler, getQuery, sendRedirect } from 'h3';
-import { Polar } from '@polar-sh/sdk';
+import { polar } from 'src/config/polar';
 import { env } from '../../../config/env';
 
 export default defineEventHandler(async (event) => {
@@ -10,10 +10,6 @@ export default defineEventHandler(async (event) => {
       statusCode: 400,
       statusMessage: 'Missing products parameter',
     });
-  const polar = new Polar({ 
-    accessToken: env.POLAR_ACCESS_TOKEN, 
-    server: env.POLAR_MODE 
-  });
   const checkoutSession = await polar.checkouts.create({
     products: Array.isArray(products) ? products : [products],
     ...(env.POLAR_SUCCESS_URL ? { successUrl: env.POLAR_SUCCESS_URL } : {}),

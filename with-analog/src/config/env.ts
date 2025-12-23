@@ -2,11 +2,12 @@ import { z } from 'zod';
 import '@dotenvx/dotenvx/config';
 
 const envSchema = z.object({
+  PORT: z.number().default(3000),
   POLAR_MODE: z.enum(['sandbox', 'production']).default('production'),
-  POLAR_ACCESS_TOKEN: z.string().default(''),
-  POLAR_WEBHOOK_SECRET: z.string().default(''),
-  POLAR_SUCCESS_URL: z.string().optional(),
-});
+  POLAR_ACCESS_TOKEN: z.string().min(1, 'POLAR_ACCESS_TOKEN is required'),
+  POLAR_WEBHOOK_SECRET: z.string().min(1, 'POLAR_WEBHOOK_SECRET is required'),
+  POLAR_SUCCESS_URL: z.url({ message: 'POLAR_SUCCESS_URL is missing' }).optional(),
+})
 
 export const env = envSchema.parse(process.env);
 

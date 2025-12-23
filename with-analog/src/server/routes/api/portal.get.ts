@@ -1,6 +1,5 @@
-import { defineEventHandler, getQuery, sendRedirect, createError } from 'h3';
-import { Polar } from '@polar-sh/sdk';
-import { env } from '../../../config/env';
+import { createError, defineEventHandler, getQuery, sendRedirect } from 'h3';
+import { polar } from 'src/config/polar';
 
 export default defineEventHandler(async (event) => {
   const query = getQuery(event);
@@ -10,10 +9,6 @@ export default defineEventHandler(async (event) => {
       statusCode: 400,
       statusMessage: 'Missing email parameter',
     });
-  const polar = new Polar({ 
-    accessToken: env.POLAR_ACCESS_TOKEN, 
-    server: env.POLAR_MODE 
-  });
   const customer = await polar.customers.list({ email });
   if (!customer.result.items.length) 
     throw createError({
