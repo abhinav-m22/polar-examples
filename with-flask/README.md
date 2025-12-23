@@ -49,10 +49,3 @@ flask run --host=0.0.0.0 --port=8000
 ```
 
 The application will be available at `http://localhost:8000`.
-
-## Features
-
-- **Home Page (`/`)**: Displays all available products with checkout links and a customer portal form
-- **Checkout (`/checkout`)**: Creates a checkout session and redirects to Polar checkout
-- **Customer Portal (`/portal`)**: Allows customers to manage their subscriptions
-- **Webhooks (`/polar/webhooks`)**: Handles Polar webhook events with signature verification

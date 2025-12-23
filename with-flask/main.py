@@ -32,11 +32,9 @@ def home():
     """Home page displaying products and customer portal form"""
     try:
         products = polar.products.list(is_archived=False)
-        
         products_html = ""
         for product in products.result.items:
             products_html += f'<div><a target="_blank" href="/checkout?products={product.id}">{product.name}</a></div>'
-        
         html_content = f"""
         <html>
             <body>
@@ -58,23 +56,19 @@ def home():
 def checkout():
     """Create a checkout session and redirect to Polar checkout page"""
     products = request.args.get("products")
-    
     if not products:
         return Response("Missing products parameter", status=400)
-    
     try:
         # Get the host from the request to construct success URL
         host = request.headers.get("host", "localhost:8000")
         success_url = POLAR_SUCCESS_URL or f"http://{host}/"
         product_id = products.split(",")[0]
-        
         checkout_session = polar.checkouts.custom.create(
             request={
                 "product_id": product_id,
                 "success_url": success_url
             }
         )
-        
         return redirect(checkout_session.url, code=302)
     except Exception as e:
         return Response(str(e), status=500)
@@ -84,24 +78,18 @@ def checkout():
 def customer_portal():
     """Create a customer portal session and redirect"""
     email = request.args.get("email")
-    
     if not email:
         return Response("Missing email parameter", status=400)
-    
     try:
         # Find customer by email
         customer_response = polar.customers.list(email=email)
-        
         if not customer_response.result.items:
             return Response("Customer not found", status=404)
-        
         customer = customer_response.result.items[0]
-        
         # Create customer portal session
         session = polar.customer_sessions.create(
             request={"customer_id": customer.id}
         )
-        
         return redirect(session.customer_portal_url, code=302)
     except Exception as e:
         return Response(str(e), status=500)
@@ -120,7 +108,6 @@ def webhooks():
         return json.loads(event.model_dump_json())
     except WebhookVerificationError:
         return Response("", status=403)
-
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=8000, debug=True)
