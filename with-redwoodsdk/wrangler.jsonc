@@ -1,0 +1,32 @@
+{
+  // Schema reference for wrangler configuration
+  "$schema": "node_modules/wrangler/config-schema.json",
+
+  // Name of your worker
+  "name": "with-redwoodsdk",
+
+  // Entry point for your worker
+  "main": "src/worker.tsx",
+
+  // Compatibility settings
+  "compatibility_date": "2025-08-21",
+  "compatibility_flags": ["nodejs_compat"],
+
+  // Assets configuration
+  "assets": {
+    "binding": "ASSETS",
+  },
+
+  // Observability settings
+  "observability": {
+    "enabled": true,
+  },
+
+  // Environment variables - Update with your Polar credentials
+  "vars": {
+    "POLAR_MODE": "production",
+    "SUCCESS_URL": "http://localhost:3000",
+    "POLAR_ACCESS_TOKEN": "polar_oat_...",
+    "POLAR_WEBHOOK_SECRET": "polar_whs_...",
+  },
+}
