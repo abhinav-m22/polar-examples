@@ -14,19 +14,19 @@
 
   // Assets configuration
   "assets": {
-    "binding": "ASSETS"
+    "binding": "ASSETS",
   },
 
   // Observability settings
   "observability": {
-    "enabled": true
+    "enabled": true,
   },
 
   // Environment variables - Update with your Polar credentials
   "vars": {
-    "POLAR_MODE": "sandbox",
+    "POLAR_MODE": "production",
+    "SUCCESS_URL": "http://localhost:3000",
     "POLAR_ACCESS_TOKEN": "polar_oat_...",
     "POLAR_WEBHOOK_SECRET": "polar_whs_...",
-    "POLAR_SUCCESS_URL": "http://localhost:5173/"
-  }
+  },
 }

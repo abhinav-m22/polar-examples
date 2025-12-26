@@ -23,28 +23,21 @@ npx degit polarsource/examples/with-redwoodsdk ./with-redwoodsdk
 }
 ```
 
-2. Install dependencies:
+2. Run the command below to install project dependencies:
 
 ```bash
 npm install
 ```
 
-3. Run the development server:
+3. Run the RedwoodSDK application using the following command:
 
 ```bash
 npm run dev
 ```
 
-4. Open `http://localhost:5173/` to see your products and checkout links.
+### Webhook Testing
 
-## Features
-
-- **Checkout** - Redirect to Polar checkout (`/api/checkout?product=PRODUCT_ID`)
-- **Customer Portal** - Access customer portal by email (`/api/portal?email=EMAIL`)
-- **Webhooks** - Receive Polar events at `/polar/webhooks`
-
-## Learn More
-
-- [Polar Documentation](https://docs.polar.sh/)
-- [RedwoodSDK Documentation](https://docs.rwsdk.com/)
-- [Cloudflare Workers Documentation](https://developers.cloudflare.com/workers)
+1. Use tools like ngrok for local webhook testing
+2. Configure webhook URL in Polar dashboard
+3. Configure `vite.server.allowedhosts` in `vite.config.mts` to allow it.
+4. Trigger test events from Polar dashboard
